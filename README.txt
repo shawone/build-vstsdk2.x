@@ -15,7 +15,7 @@ ppc is not always supported on recent g++.
 http://www.steinberg.net/en/company/developers.html
 
 - cp again.cpp and again.h examples located in:
-[...]public.sdk/sample/vst/again/source
+[...]/VST3 SDK/vstgui4/vstgui/tutorial/vstsdk2.4/public.sdk/samples/vst2.x/again/source/
 
 - git clone this repository into VST3 directory
  
