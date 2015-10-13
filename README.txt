@@ -14,10 +14,11 @@ ppc is not always supported on recent g++.
 - download and extract VST 3.6.5 or latest:
 http://www.steinberg.net/en/company/developers.html
 
-- cp again.cpp and again.h examples located in:
-[...]/VST3 SDK/vstgui4/vstgui/tutorial/vstsdk2.4/public.sdk/samples/vst2.x/again/source/
-
 - git clone this repository into VST3 directory
+
+- To use the steinberg example VST, cp again.cpp and again.h in that new repository.
+[...]/VST3 SDK/vstgui4/vstgui/tutorial/vstsdk2.4/public.sdk/samples/vst2.x/again/source/again.cpp
+[...]/VST3 SDK/vstgui4/vstgui/tutorial/vstsdk2.4/public.sdk/samples/vst2.x/again/source/again.h
  
 - build and add generated VST:
 make
