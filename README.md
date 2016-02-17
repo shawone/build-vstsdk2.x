@@ -1,7 +1,7 @@
 OSX Makefile to build VST with VST SDK 2.x
 
 ###Note
-Makefile is in "shawone" directory.
+Makefile in current work directory,  
 The purpose of this simple Makefile is to create a universal binary,
 and compatible with osx architectures:
 - x86_64
