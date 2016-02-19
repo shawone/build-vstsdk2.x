@@ -4,10 +4,24 @@ VST_PATH = ../
 ARCH_PPC = -arch ppc -mcpu=7450 -maltivec -maltivec -mabi=altivec
 ARCH_INTEL = -arch i386
 ARCH_X86_64 = -arch x86_64
+ARCH_LINUX = -fPIC -Fbuild/ -D__cdecl=""
 VSTFLAGS = -x c++ -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O3 -fvisibility-inlines-hidden -Wmost -Wno-four-char-constants -Wno-unknown-pragmas -Fbuild/
 INCLUDES = -I$(VST_PATH) -I$(VST_PATH)/public.sdk/source/vst2.x -I$(VST_PATH)/pluginterfaces/vst2.x -I$(VST_PATH)/vstgui.sf/vstgui
 
+OS := $(shell uname)
+ifeq ($(OS),Darwin)
 all: clean build_sdk_i386 build_sdk_x86_64 vst_package create_plist bin_merge
+else
+all: linux
+endif
+
+linux:
+	mkdir -p build/linux
+	g++ $(ARCH_LINUX) $(INCLUDES) -c $(VST_PATH)/public.sdk/source/vst2.x/audioeffect.cpp -o build/linux/audioeffect.o
+	g++ $(ARCH_LINUX) $(INCLUDES) -c $(VST_PATH)/public.sdk/source/vst2.x/audioeffectx.cpp -o build/linux/audioeffectx.o
+	g++ $(ARCH_LINUX) $(INCLUDES) -c $(VST_PATH)/public.sdk/source/vst2.x/vstplugmain.cpp -o build/linux/vstplugmain.o
+	g++ $(ARCH_LINUX) $(INCLUDES) -c ./again.cpp -o build/linux/again.o
+	g++ -shared -Lbuild/linux -Fbuild/linux build/linux/again.o build/linux/audioeffect.o build/linux/audioeffectx.o build/linux/vstplugmain.o -o build/linux/$(PLUGIN_NAME).so
 
 build_sdk_i386:
 	mkdir -p build/i386
